@@ -3,12 +3,14 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
+// var jshint = require('gulp-jshint');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
-var stylish = require('jshint-stylish');
+// var stylish = require('jshint-stylish');
 var plumber = require('gulp-plumber');
+var header = require('gulp-header');
 var notify = require('gulp-notify');
+const rename = require("gulp-rename");
 var fileinclude = require('gulp-file-include');
 var autoprefixer = require('gulp-autoprefixer');
 var runSequence = require('run-sequence');
@@ -93,22 +95,35 @@ function scss() {
 
 // Javascript
 //
+// JS task
 function js() {
-  return gulp.src(path.src.js)
-    .pipe(customPlumber('Error Running JS'))
-    .pipe(jshint('./.jshintrc'))
-    .pipe(notify(function (file) {
-      if (!file.jshint.success) {
-        return file.relative + " (" + file.jshint.results.length + " errors)\n";
-      }
+  return gulp
+    .src(path.src.js)
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
     }))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .on('error', gutil.log)
     .pipe(gulp.dest(path.build.dirDev + 'js/'))
     .pipe(bs.reload({
       stream: true
     }));
 }
+// function js() {
+//   return gulp.src(path.src.js)
+//     .pipe(customPlumber('Error Running JS'))
+//     .pipe(jshint('./.jshintrc'))
+//     .pipe(notify(function (file) {
+//       if (!file.jshint.success) {
+//         return file.relative + " (" + file.jshint.results.length + " errors)\n";
+//       }
+//     }))
+//     .pipe(jshint.reporter('jshint-stylish'))
+//     .on('error', gutil.log)
+//     .pipe(gulp.dest(path.build.dirDev + 'js/'))
+//     .pipe(bs.reload({
+//       stream: true
+//     }));
+// }
 // Images
 function images() {
   return gulp.src(path.src.images)
