@@ -34,7 +34,7 @@ var path = {
         blur 	 : 'src/images/**/*.jpg'
     },
     build : { 
-        dirDev : '.'
+      dirDev : './'
     }
 };
 
