@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var cleanCSS = require('gulp-clean-css');
 var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 // var jshint = require('gulp-jshint');
@@ -87,6 +88,7 @@ function scss() {
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('/maps'))
+    .pipe(cleanCSS())
     .pipe(gulp.dest(path.build.dirDev + 'css/'))
     .pipe(bs.reload({
       stream: true

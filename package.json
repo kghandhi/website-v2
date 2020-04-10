@@ -16,6 +16,7 @@
     "browser-sync": "^2.24.5",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean-css": "4.0.0",
     "gulp-file-include": "^2.0.1",
     "gulp-gm": "0.0.9",
     "gulp-header": "2.0.7",
